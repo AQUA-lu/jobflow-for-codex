@@ -48,7 +48,7 @@ def main() -> None:
     created = []
     skipped = []
     mappings = {
-        "user_profile.yaml": root / "user_profile.yaml",
+        "user_profile.example.yaml": root / "user_profile.yaml",
         "screening_rules.md": root / "screening_rules.md",
         "applications.example.jsonl": root / "applications.example.jsonl",
         "automation_prompt.md": root / "automation_prompt.md",
