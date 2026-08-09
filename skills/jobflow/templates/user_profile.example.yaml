@@ -1,0 +1,35 @@
+# Copy this file to your private workspace as user_profile.yaml and customize it.
+# Do not commit personal names, contact details, resume paths, or job-search data.
+
+user:
+  display_name: "Your Name"
+  timezone: "Asia/Shanghai"
+
+resumes:
+  default: ""
+  variants: {}
+
+targets:
+  roles: []
+  keywords: []
+  locations:
+    preferred: []
+    acceptable: []
+
+platforms:
+  boss:
+    enabled: true
+    per_slot_target: 5
+  liepin:
+    enabled: true
+    per_slot_target: 5
+
+automation:
+  execution_hours_local: []
+  inspection_minutes: 30
+  daily_report: true
+
+safety:
+  send_resume_when_clearly_requested: false
+  auto_reply_complex_messages: false
+  require_visible_success_before_ledger_write: true
