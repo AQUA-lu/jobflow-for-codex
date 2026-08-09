@@ -28,10 +28,13 @@ class JobFlowCliTests(unittest.TestCase):
             result = run_script("init_jobflow.py", "--workspace", workspace)
             ledger = Path(workspace) / "data" / "job_search" / "applications.jsonl"
             example = Path(workspace) / "data" / "job_search" / "applications.example.jsonl"
+            profile = Path(workspace) / "data" / "job_search" / "user_profile.yaml"
 
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(ledger.read_text(encoding="utf-8"), "")
             self.assertTrue(example.exists())
+            self.assertTrue(profile.exists())
+            self.assertIn('display_name: "Your Name"', profile.read_text(encoding="utf-8"))
 
     def test_force_requires_backup_for_existing_ledger(self) -> None:
         with tempfile.TemporaryDirectory() as workspace:
