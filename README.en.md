@@ -4,6 +4,8 @@
 
 A local Codex workflow for job screening, recruiter messages, application ledgers, and daily reports.
 
+Current version: `0.2.0`. v0.2 adds ledger migration, platform/status alias normalization, stable job IDs, atomic updates, strict validation, and empty-ledger initialization.
+
 [简体中文](README.md) | [English](README.en.md)
 
 [![Codex Workflow](https://img.shields.io/badge/Codex-Workflow-111827)](#)
@@ -70,6 +72,7 @@ This creates:
   user_profile.yaml
   screening_rules.md
   applications.jsonl
+  applications.example.jsonl
   automation_prompt.md
   reports/
 ```
@@ -103,7 +106,18 @@ Build an automation prompt:
 
 ```bash
 python skills/jobflow/scripts/build_automation_prompt.py --workspace /path/to/your/workspace --output /path/to/your/workspace/data/job_search/automation_prompt.generated.md
+
+# Migrate to a new ledger without overwriting the source
+python skills/jobflow/scripts/migrate_ledger.py --ledger /path/to/your/workspace/data/job_search/applications.jsonl --output /path/to/your/workspace/data/job_search/applications.v0.2.jsonl
+
+# Atomically append or update one local record by job_id
+python skills/jobflow/scripts/upsert_ledger.py --ledger /path/to/your/workspace/data/job_search/applications.jsonl --record-file /path/to/private-record.json
+
+# Strictly validate duplicate IDs, duplicate URLs, unknown aliases, and missing recommended fields
+python skills/jobflow/scripts/validate_ledger.py --workspace /path/to/your/workspace --strict
 ```
+
+Initialization creates an empty `applications.jsonl`. Example records are kept separately in `applications.example.jsonl` and are never counted as real applications.
 
 ## Where User Input Is Required
 
@@ -135,6 +149,12 @@ The ledger uses:
 - `not_suitable`
 - `needs_user_action`
 - `needs_review`
+- `recruiter_replied`
+- `interview_scheduled`
+- `rejected`
+- `withdrawn`
+- `offer`
+- `no_response`
 
 ## Where Data Is Stored
 
@@ -165,6 +185,8 @@ Main parts:
 - `references/`: platform notes, message rules, and screening guidance.
 - `templates/`: user profile, screening rules, ledger, report, and automation prompt templates.
 - `scripts/`: initialization, ledger validation, report generation, target checks, and prompt generation.
+- `templates/schema-v0.2.md`: ledger fields, aliases, and migration guidance.
+- `tests/`: local regression tests that do not access recruitment platforms or real user data.
 
 ## Supported Platforms
 
@@ -180,6 +202,7 @@ More platforms can be added later through new references and workflow rules.
 - Does not guarantee job-search outcomes.
 - Platform UI changes may require workflow updates.
 - Complex recruiter messages still require user judgment.
+- Real resumes, account information, cookies, sessions, recruiter messages, and application ledgers must stay in the user's workspace and must never be committed to this repository.
 
 ## Acknowledgements
 

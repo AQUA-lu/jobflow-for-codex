@@ -27,6 +27,7 @@ Load only the references needed for the current task:
 - Liepin browser workflow: `references/platform-liepin.md`
 - Recruiter message handling: `references/message-rules.md`
 - Screening rules design: `references/screening-rules-guide.md`
+- Ledger schema and migration: `templates/schema-v0.2.md`
 
 ## Local Data Layout
 
@@ -37,6 +38,7 @@ data/job_search/
   user_profile.yaml
   screening_rules.md
   applications.jsonl
+  applications.example.jsonl
   reports/
 ```
 
@@ -48,7 +50,11 @@ python skills/jobflow/scripts/validate_ledger.py --ledger <workspace>/data/job_s
 python skills/jobflow/scripts/summarize_day.py --ledger <workspace>/data/job_search/applications.jsonl --date YYYY-MM-DD
 python skills/jobflow/scripts/check_targets.py --ledger <workspace>/data/job_search/applications.jsonl --date YYYY-MM-DD --boss 5 --liepin 5
 python skills/jobflow/scripts/build_automation_prompt.py --workspace <workspace>
+python skills/jobflow/scripts/migrate_ledger.py --ledger <workspace>/data/job_search/applications.jsonl --output <workspace>/data/job_search/applications.v0.2.jsonl
+python skills/jobflow/scripts/upsert_ledger.py --ledger <workspace>/data/job_search/applications.jsonl --record-file <private-record.json>
 ```
+
+`validate_ledger.py --strict` treats duplicate IDs, duplicate URLs, unknown aliases, and missing recommended fields as failures. The default mode reports those conditions as warnings while still failing on malformed required data.
 
 ## Status Model
 
@@ -60,8 +66,16 @@ Use canonical status values in shared tooling:
 - `not_suitable`
 - `needs_user_action`
 - `needs_review`
+- `recruiter_replied`
+- `interview_scheduled`
+- `rejected`
+- `withdrawn`
+- `offer`
+- `no_response`
 
 Localized labels can be shown in reports, but scripts should use canonical values for portability.
+
+Older Chinese and platform-specific values are normalized by `migrate_ledger.py`. The original value is retained in a `legacy_*` field when it changes.
 
 ## Standard Run Order
 
@@ -87,3 +101,6 @@ Reports should include:
 - Follow-ups due.
 - Screening-rule improvement notes.
 - Automation health and slot target status.
+- Validation warnings and migration guidance.
+
+Private records must remain in the user's workspace and must never be committed to this repository.

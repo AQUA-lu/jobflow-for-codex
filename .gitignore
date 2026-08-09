@@ -20,6 +20,7 @@ screening_rules.local.md
 automation_prompt.local.md
 reports/
 logs/
+.jobflow-backups/
 
 # Personal documents and resumes
 *.pdf

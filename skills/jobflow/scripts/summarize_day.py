@@ -11,7 +11,9 @@ from jobflow_common import (
     platform_counts,
     read_jsonl,
     resolve_ledger,
+    normalize_status,
     today_rows,
+    validate_rows,
 )
 
 
@@ -41,9 +43,10 @@ def main() -> None:
     todays = today_rows(rows, args.date)
     contacted = contacted_rows(rows, args.date)
     due = due_rows(rows, args.date)
-    status_counts = Counter(str(row.get("status") or "unknown") for row in todays)
+    status_counts = Counter(normalize_status(row.get("status")) or "unknown" for row in todays)
     counts = platform_counts(contacted)
-    needs_user = [row for row in todays if row.get("status") == "needs_user_action"]
+    needs_user = [row for row in todays if normalize_status(row.get("status")) == "needs_user_action"]
+    validation = validate_rows(rows)
 
     print(f"# JobFlow Daily Report - {args.date}\n")
     print("## Summary\n")
@@ -66,6 +69,19 @@ def main() -> None:
     if reviewed:
         for row in reviewed:
             print(bullet(row))
+    else:
+        print("- None")
+
+    print("\n## Automation Health\n")
+    print(f"- Ledger validation errors: {len(validation['errors'])}")
+    print(f"- Ledger warnings: {len(validation['warnings'])}")
+    print(f"- Follow-ups due: {len(due)}")
+
+    print("\n## Notes\n")
+    if validation["errors"]:
+        print("- Resolve ledger validation errors before enabling recurring automation.")
+    elif validation["warnings"]:
+        print("- Review ledger warnings; run migrate_ledger.py before strict validation.")
     else:
         print("- None")
 

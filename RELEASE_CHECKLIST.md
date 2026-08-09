@@ -10,6 +10,7 @@ Use this checklist before pushing JobFlow for Codex to a public repository.
 - [ ] No account names, phone numbers, WeChat IDs, emails, cookies, sessions, tokens, or credentials are present.
 - [ ] No local absolute paths to private files are present.
 - [ ] No real recruiter messages or application records are present.
+- [ ] `git ls-files` contains no private workspace path or generated runtime file.
 
 ## Suggested Scans
 
@@ -25,13 +26,16 @@ Review every match manually. Some matches are expected in documentation and temp
 
 ```bash
 python /path/to/validate_plugin.py .
-python -m py_compile skills/jobflow/scripts/*.py
+python -m compileall -q skills/jobflow/scripts tests
+python -m unittest discover -s tests -v
 python skills/jobflow/scripts/init_jobflow.py --workspace /tmp/jobflow-test
 python skills/jobflow/scripts/validate_ledger.py --workspace /tmp/jobflow-test
 python skills/jobflow/scripts/summarize_day.py --workspace /tmp/jobflow-test --date 2026-01-01
 python skills/jobflow/scripts/check_targets.py --workspace /tmp/jobflow-test --date 2026-01-01 --boss 1 --liepin 1
 python skills/jobflow/scripts/build_automation_prompt.py --workspace /tmp/jobflow-test
 ```
+
+On PowerShell, use `python -m compileall -q skills/jobflow/scripts tests`; do not rely on native-command wildcard expansion.
 
 ## Distribution Notes
 
