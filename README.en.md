@@ -1,14 +1,14 @@
 <div align="center">
 
-# JobFlow for Codex
+# JobFlow for Codebuddy
 
-A local Codex workflow for job screening, recruiter messages, application ledgers, and daily reports.
+A local Codebuddy workflow for job screening, recruiter messages, application ledgers, and daily reports.
 
 Current version: `0.2.0`. v0.2 adds ledger migration, platform/status alias normalization, stable job IDs, atomic updates, strict validation, and empty-ledger initialization.
 
 [简体中文](README.md) | [English](README.en.md)
 
-[![Codex Workflow](https://img.shields.io/badge/Codex-Workflow-111827)](#)
+[![Codebuddy Workflow](https://img.shields.io/badge/Codebuddy-Workflow-111827)](#)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB)](#prerequisites)
 [![Windows Tested](https://img.shields.io/badge/Windows-tested-0078D4)](#compatibility)
 [![License MIT](https://img.shields.io/badge/License-MIT-3DA639)](LICENSE)
@@ -17,17 +17,17 @@ Current version: `0.2.0`. v0.2 adds ledger migration, platform/status alias norm
 
 ---
 
-JobFlow for Codex is a local job-search workflow for Codex. It organizes job discovery, screening, recruiter contact, message review, resume sending, progress tracking, and daily reports into reusable templates, scripts, and Codex skill instructions.
+JobFlow for Codebuddy is a local job-search workflow for Codebuddy. It organizes job discovery, screening, recruiter contact, message review, resume sending, progress tracking, and daily reports into reusable templates, scripts, and Codebuddy skill instructions.
 
-It is designed for users who want Codex to assist with repetitive job-search workflows on platforms such as BOSS Direct and Liepin. It is not a mass-application bot and does not bypass CAPTCHA, login, platform risk controls, or safety checks.
+It is designed for users who want Codebuddy to assist with repetitive job-search workflows on platforms such as BOSS Direct and Liepin. It is not a mass-application bot and does not bypass CAPTCHA, login, platform risk controls, or safety checks.
 
 ## What You Can Do With It
 
 - Initialize a private local job-search workspace.
 - Maintain an `applications.jsonl` application ledger.
 - Store screening rules in `screening_rules.md`.
-- Ask Codex to screen roles against your rules.
-- Ask Codex to review recruiter messages and classify them.
+- Ask Codebuddy to screen roles against your rules.
+- Ask Codebuddy to review recruiter messages and classify them.
 - Generate daily job-search reports.
 - Generate reviewable automation prompts for scheduled runs.
 
@@ -36,27 +36,27 @@ It is designed for users who want Codex to assist with repetitive job-search wor
 - You are actively searching for jobs.
 - You want a regular daily application and follow-up rhythm.
 - You want a local record of contacted, resume-sent, rejected, and pending roles.
-- You want Codex to handle repetitive workflow steps while keeping human judgment in the loop.
+- You want Codebuddy to handle repetitive workflow steps while keeping human judgment in the loop.
 
 ## Prerequisites
 
-- Codex installed locally.
+- Codebuddy installed locally.
 - Python 3.10 or newer.
-- Logged-in browser sessions for supported job platforms if you want Codex to operate websites.
+- Logged-in browser sessions for supported job platforms if you want Codebuddy to operate websites.
 - Local resume file paths configured if you want resume sending support.
 - Reviewed automation prompts if you want scheduled runs.
 
 ## Compatibility
 
-This project has only been self-tested on Windows with local Codex workflows. Other operating systems, browser-control setups, or automation modes may work, but you should verify and adapt them yourself.
+This project has only been self-tested on Windows with local Codebuddy workflows. Other operating systems, browser-control setups, or automation modes may work, but you should verify and adapt them yourself.
 
 ## Quick Start
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/laok775/jobflow-for-codex.git
-cd jobflow-for-codex
+git clone https://github.com/AQUA-lu/jobflow-for-codex.git
+cd jobflow-for-codebuddy
 ```
 
 Initialize your private workspace:
@@ -128,11 +128,11 @@ JobFlow is not fully unattended. User intervention is required when:
 - A recruiter asks for WeChat, phone, salary details, availability, or interview time.
 - A recruiter asks a question that requires personal judgment.
 - You enable scheduled automation and need to review the generated prompt.
-- A platform UI changes and Codex cannot confirm success state.
+- A platform UI changes and Codebuddy cannot confirm success state.
 
 ## Message Handling
 
-Codex can help classify messages, but should not make judgment-heavy replies for you:
+Codebuddy can help classify messages, but should not make judgment-heavy replies for you:
 
 - Clearly unsuitable: set status to `not_suitable`.
 - Resume requested: send the configured resume when possible and set status to `resume_sent`.
@@ -164,13 +164,11 @@ Your real data stays in your own workspace, for example:
 /path/to/your/workspace/data/job_search/
 ```
 
-This repository contains only the plugin, templates, and scripts. It should not contain real resumes, account data, cookies, sessions, or real application records.
+This repository contains only the skill definition, templates, and scripts. It should not contain real resumes, account data, cookies, sessions, or real application records.
 
 ## Project Contents
 
 ```text
-.codex-plugin/
-  plugin.json
 skills/
   jobflow/
     SKILL.md
@@ -181,7 +179,7 @@ skills/
 
 Main parts:
 
-- `SKILL.md`: workflow instructions for Codex.
+- `SKILL.md`: workflow instructions for Codebuddy.
 - `references/`: platform notes, message rules, and screening guidance.
 - `templates/`: user profile, screening rules, ledger, report, and automation prompt templates.
 - `scripts/`: initialization, ledger validation, report generation, target checks, and prompt generation.
@@ -206,7 +204,7 @@ More platforms can be added later through new references and workflow rules.
 
 ## Acknowledgements
 
-- Thanks to OpenAI Codex for enabling local agent workflows.
+- Thanks to OpenAI Codebuddy for enabling local agent workflows.
 - Thanks to the [Linux.do](https://linux.do/) community for discussion, feedback, and support.
 - Thanks to job platforms such as BOSS Direct and Liepin for providing job-search and recruiter communication services.
 - The README presentation style is inspired by open-source projects such as [CoCo Downloader](https://github.com/markcxx/coco-downloader).

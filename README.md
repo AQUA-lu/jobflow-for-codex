@@ -1,14 +1,14 @@
 <div align="center">
 
-# 求职流 JobFlow for Codex
+# 求职流 JobFlow for Codebuddy
 
-一套面向 Codex 的本地求职工作流：筛选岗位、跟进消息、维护台账、生成日报。
+一套面向 Codebuddy 的本地求职工作流：筛选岗位、跟进消息、维护台账、生成日报。
 
 当前版本：`0.2.0`。v0.2 增加了台账迁移、平台/状态别名规范化、稳定岗位 ID、原子更新、严格校验和空台账初始化。
 
 [简体中文](README.md) | [English](README.en.md)
 
-[![Codex Workflow](https://img.shields.io/badge/Codex-Workflow-111827)](#)
+[![Codebuddy Workflow](https://img.shields.io/badge/Codebuddy-Workflow-111827)](#)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB)](#前置条件)
 [![Windows Tested](https://img.shields.io/badge/Windows-tested-0078D4)](#兼容性说明)
 [![License MIT](https://img.shields.io/badge/License-MIT-3DA639)](LICENSE)
@@ -17,17 +17,17 @@
 
 ---
 
-求职流 JobFlow for Codex 是一套给 Codex 使用的本地求职工作流。它把“找岗位、按规则筛选、打招呼、看消息、发简历、记录进度、生成日报”整理成可复用的流程、模板和脚本。
+求职流 JobFlow for Codebuddy 是一套给 Codebuddy 使用的本地求职工作流。它把“找岗位、按规则筛选、打招呼、看消息、发简历、记录进度、生成日报”整理成可复用的流程、模板和脚本。
 
-它适合正在主动找工作的用户，尤其适合希望用 Codex 辅助处理 BOSS 直聘、猎聘这类招聘网站的人。它不是自动投递外挂，也不会绕过验证码、登录、平台风控或安全限制。
+它适合正在主动找工作的用户，尤其适合希望用 Codebuddy 辅助处理 BOSS 直聘、猎聘这类招聘网站的人。它不是自动投递外挂，也不会绕过验证码、登录、平台风控或安全限制。
 
 ## 你可以用它做什么
 
 - 初始化一套本地求职工作区。
 - 维护一份 `applications.jsonl` 求职台账。
 - 用 `screening_rules.md` 记录你的岗位筛选规则。
-- 让 Codex 按规则辅助筛选岗位。
-- 让 Codex 检查招聘方消息并分类处理。
+- 让 Codebuddy 按规则辅助筛选岗位。
+- 让 Codebuddy 检查招聘方消息并分类处理。
 - 生成每日求职日报。
 - 生成可审核的定时自动化 prompt。
 
@@ -47,27 +47,27 @@
 - 你正在找产品经理、增长、AI、Web3、运营、技术等岗位。
 - 你希望每天固定节奏投递和跟进。
 - 你希望有一份本地记录，知道哪些岗位已打招呼、已发简历、被拒、待回复。
-- 你希望 Codex 帮你做重复流程，但关键判断仍由你确认。
+- 你希望 Codebuddy 帮你做重复流程，但关键判断仍由你确认。
 
 ## 前置条件
 
-- 已安装 Codex，并能在本地运行 Python 脚本。
+- 已安装 Codebuddy，并能在本地运行 Python 脚本。
 - Python 3.10 或更高版本。
-- 如果要让 Codex 操作招聘网站，需要浏览器里已经登录对应平台。
+- 如果要让 Codebuddy 操作招聘网站，需要浏览器里已经登录对应平台。
 - 如果要自动发送简历，需要先在本地配置简历文件路径。
-- 如果要使用定时任务，需要你自己在 Codex 里创建或审核自动化 prompt。
+- 如果要使用定时任务，需要你自己在 Codebuddy 里创建或审核自动化 prompt。
 
 ## 兼容性说明
 
-当前项目只在 Windows + 本地 Codex 工作流下自测通过。其他操作系统、浏览器控制方式或自动化模式可能也能使用，但需要使用者自行验证和适配。
+当前项目只在 Windows + 本地 Codebuddy 工作流下自测通过。其他操作系统、浏览器控制方式或自动化模式可能也能使用，但需要使用者自行验证和适配。
 
 ## 快速开始
 
 克隆仓库后，进入项目目录：
 
 ```bash
-git clone https://github.com/laok775/jobflow-for-codex.git
-cd jobflow-for-codex
+git clone https://github.com/AQUA-lu/jobflow-for-codex.git
+cd jobflow-for-codebuddy
 ```
 
 初始化你的私有求职工作区：
@@ -139,12 +139,12 @@ python skills/jobflow/scripts/validate_ledger.py --workspace /path/to/your/works
 - 招聘方问微信、电话、薪资、到岗时间、面试时间时，需要你决定怎么回复。
 - 招聘方的问题需要结合个人情况判断时，需要你回复。
 - 启用定时自动化前，需要你审核生成的 prompt。
-- 平台页面结构变化导致 Codex 无法确认成功状态时，需要你复核。
+- 平台页面结构变化导致 Codebuddy 无法确认成功状态时，需要你复核。
 
 ## 一次完整运行
 
 1. 初始化私有 workspace，并填写 `user_profile.yaml` 和 `screening_rules.md`。
-2. 让 Codex 读取规则和台账，检查招聘方消息。
+2. 让 Codebuddy 读取规则和台账，检查招聘方消息。
 3. 按筛选规则查看岗位详情，只在确认成功状态后记录联系结果。
 4. 对需要判断的消息由你决定回复内容、薪资、联系方式和面试安排。
 5. 用日报和跟进列表检查当天进展与待处理事项。
@@ -153,7 +153,7 @@ python skills/jobflow/scripts/validate_ledger.py --workspace /path/to/your/works
 
 ## 消息处理规则
 
-Codex 可以辅助判断消息，但不会替你乱回复：
+Codebuddy 可以辅助判断消息，但不会替你乱回复：
 
 - 明确说不合适：更新为 `not_suitable`。
 - 明确要简历：如果你配置了简历路径，可以发送简历并更新为 `resume_sent`。
@@ -199,8 +199,6 @@ Codex 可以辅助判断消息，但不会替你乱回复：
 ## 项目结构
 
 ```text
-.codex-plugin/
-  plugin.json
 skills/
   jobflow/
     SKILL.md
@@ -211,7 +209,7 @@ skills/
 
 核心内容：
 
-- `SKILL.md`：告诉 Codex 如何执行求职流。
+- `SKILL.md`：告诉 Codebuddy 如何执行求职流。
 - `references/`：BOSS 直聘、猎聘、消息处理、筛选规则说明。
 - `templates/`：用户配置、筛选规则、台账、日报、自动化 prompt 模板。
 - `scripts/`：初始化、校验台账、生成日报、检查目标、生成自动化 prompt。
@@ -236,7 +234,7 @@ skills/
 
 ## 致谢
 
-- 感谢 OpenAI Codex 提供本地智能体工作流能力。
+- 感谢 OpenAI Codebuddy 提供本地智能体工作流能力。
 - 感谢 [Linux.do](https://linux.do/) 社区提供交流、反馈与支持。
 - 感谢 BOSS 直聘、猎聘等招聘平台提供职位搜索和招聘沟通服务。
 - README 展示结构参考了 [CoCo Downloader](https://github.com/markcxx/coco-downloader) 等开源项目的写法。

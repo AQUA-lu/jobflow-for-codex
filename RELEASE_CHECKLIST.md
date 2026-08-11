@@ -1,6 +1,6 @@
 # GitHub Release Checklist
 
-Use this checklist before pushing JobFlow for Codex to a public repository.
+Use this checklist before pushing JobFlow for Codebuddy to a public repository.
 
 ## Privacy
 
@@ -25,7 +25,7 @@ Review every match manually. Some matches are expected in documentation and temp
 ## Validation
 
 ```bash
-python /path/to/validate_plugin.py .
+# Codebuddy will validate the skill automatically when loaded from .codebuddy/skills/
 python -m compileall -q skills/jobflow/scripts tests
 python -m unittest discover -s tests -v
 python skills/jobflow/scripts/init_jobflow.py --workspace /tmp/jobflow-test
@@ -39,7 +39,7 @@ On PowerShell, use `python -m compileall -q skills/jobflow/scripts tests`; do no
 
 ## Distribution Notes
 
-- Keep the plugin repository generic.
+- Keep the skill repository generic.
 - Keep private runtime data outside the repository.
 - Tell users to review automation prompts before enabling recurring tasks.
 - Tell users this workflow does not bypass platform safety checks.
